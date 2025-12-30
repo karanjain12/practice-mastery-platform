@@ -10,6 +10,11 @@ import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import Training from "./pages/Training";
 import GroupLabDetail from "./pages/GroupLabDetail";
+import Assessment from "./pages/Assessment";
+import Certification from "./pages/Certification";
+import Vouchers from "./pages/Vouchers";
+import CloudServices from "./pages/CloudServices";
+import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +33,11 @@ const App = () => (
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<CourseDetail />} />
           <Route path="/training" element={<Training />} />
+          <Route path="/assessment" element={<Assessment />} />
+          <Route path="/certification" element={<Certification />} />
+          <Route path="/vouchers" element={<Vouchers />} />
+          <Route path="/cloud-services" element={<CloudServices />} />
+          <Route path="/careers" element={<Careers />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
