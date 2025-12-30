@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Clock, Star, Users, Lock, BarChart3 } from "lucide-react";
+import { Clock, Star, Users, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export interface LabCardProps {
@@ -18,13 +18,6 @@ export interface LabCardProps {
   platform?: string;
 }
 
-const levelColors = {
-  Beginner: "bg-success-light text-success",
-  Intermediate: "bg-blue-100 text-blue-700",
-  Advanced: "bg-orange-100 text-orange-700",
-  Expert: "bg-red-100 text-red-700",
-};
-
 export function LabCard({
   id,
   title,
@@ -38,23 +31,23 @@ export function LabCard({
   enrolledCount,
 }: LabCardProps) {
   return (
-    <Card variant="elevated" className="overflow-hidden group">
+    <Card variant="elevated" className="overflow-hidden group w-[280px] flex-shrink-0">
       {/* Thumbnail */}
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <img
           src={thumbnail}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute top-3 left-3 flex gap-2">
+        <div className="absolute top-3 left-3">
           <Badge variant={isFree ? "free" : "paid"}>
             {isFree ? "FREE" : `$${price}`}
           </Badge>
         </div>
         {!isFree && (
           <div className="absolute top-3 right-3">
-            <div className="w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center">
-              <Lock className="w-4 h-4 text-premium" />
+            <div className="w-8 h-8 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-md">
+              <Lock className="w-4 h-4 text-secondary" />
             </div>
           </div>
         )}
@@ -62,34 +55,30 @@ export function LabCard({
 
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between mb-2">
-          <Badge variant="level" className={levelColors[level]}>
+          <Badge variant="level" className="text-xs">
             {level}
           </Badge>
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Star className="w-4 h-4 fill-premium text-premium" />
-            <span className="font-medium">{rating.toFixed(1)}</span>
+          <div className="flex items-center gap-1 text-sm">
+            <Star className="w-4 h-4 fill-secondary text-secondary" />
+            <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
           </div>
         </div>
-        <h3 className="text-lg font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="text-base font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors leading-tight">
           {title}
         </h3>
       </CardHeader>
 
-      <CardContent className="pb-4">
+      <CardContent className="pb-3">
         <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>
         
-        <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
+        <div className="flex items-center gap-4 mt-3 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
             <Clock className="w-3.5 h-3.5" />
             <span>{duration}</span>
           </div>
           <div className="flex items-center gap-1">
             <Users className="w-3.5 h-3.5" />
-            <span>{enrolledCount.toLocaleString()} enrolled</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <BarChart3 className="w-3.5 h-3.5" />
-            <span>{level}</span>
+            <span>{enrolledCount.toLocaleString()}</span>
           </div>
         </div>
       </CardContent>
@@ -97,8 +86,9 @@ export function LabCard({
       <CardFooter>
         <Link to={`/labs/${id}`} className="w-full">
           <Button 
-            variant={isFree ? "success" : "default"} 
+            variant={isFree ? "success" : "secondary"} 
             className="w-full"
+            size="sm"
           >
             {isFree ? "Start Now" : "View Details"}
           </Button>

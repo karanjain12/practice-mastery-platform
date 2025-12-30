@@ -1,33 +1,30 @@
 import { Link } from "react-router-dom";
-import { GraduationCap, Mail, MapPin, Phone, Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
+import { GraduationCap, Mail, Linkedin, Twitter, Youtube } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-sidebar text-sidebar-foreground">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-foreground text-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <GraduationCap className="w-6 h-6 text-primary-foreground" />
+          <div className="col-span-2 md:col-span-1">
+            <Link to="/" className="flex items-center gap-2.5 mb-4">
+              <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+                <GraduationCap className="w-5 h-5 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-sidebar-foreground">EduFree</span>
+              <span className="text-lg font-semibold">SkillPath</span>
             </Link>
-            <p className="text-sidebar-foreground/70 text-sm leading-relaxed">
-              Learn, Practice & Master Real-World Tech Skills with hands-on labs and expert-led courses.
+            <p className="text-background/60 text-sm mb-4">
+              Master real-world tech skills with hands-on labs and courses.
             </p>
-            <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 rounded-lg bg-sidebar-accent flex items-center justify-center hover:bg-primary transition-colors">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-sidebar-accent flex items-center justify-center hover:bg-primary transition-colors">
+            <div className="flex gap-2">
+              <a href="#" className="w-8 h-8 rounded-lg bg-background/10 flex items-center justify-center hover:bg-primary transition-colors">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-sidebar-accent flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="#" className="w-8 h-8 rounded-lg bg-background/10 flex items-center justify-center hover:bg-primary transition-colors">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-sidebar-accent flex items-center justify-center hover:bg-primary transition-colors">
+              <a href="#" className="w-8 h-8 rounded-lg bg-background/10 flex items-center justify-center hover:bg-primary transition-colors">
                 <Youtube className="w-4 h-4" />
               </a>
             </div>
@@ -35,26 +32,21 @@ export function Footer() {
 
           {/* Products */}
           <div>
-            <h4 className="font-bold text-sidebar-foreground mb-4">Products</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold mb-4 text-sm">Products</h4>
+            <ul className="space-y-2">
               <li>
-                <Link to="/labs" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
-                  Skill Builder Labs
+                <Link to="/labs" className="text-background/60 hover:text-background transition-colors text-sm">
+                  Labs
                 </Link>
               </li>
               <li>
-                <Link to="/courses" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
-                  Digital Skills Programs
+                <Link to="/courses" className="text-background/60 hover:text-background transition-colors text-sm">
+                  Courses
                 </Link>
               </li>
               <li>
-                <Link to="/training" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
-                  Expert-Led Training
-                </Link>
-              </li>
-              <li>
-                <Link to="/certifications" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
-                  Certifications
+                <Link to="/training" className="text-background/60 hover:text-background transition-colors text-sm">
+                  Training
                 </Link>
               </li>
             </ul>
@@ -62,26 +54,21 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-bold text-sidebar-foreground mb-4">Company</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold mb-4 text-sm">Company</h4>
+            <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
-                  About Us
+                <Link to="/about" className="text-background/60 hover:text-background transition-colors text-sm">
+                  About
                 </Link>
               </li>
               <li>
-                <Link to="/careers" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
+                <Link to="/careers" className="text-background/60 hover:text-background transition-colors text-sm">
                   Careers
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
+                <Link to="/blog" className="text-background/60 hover:text-background transition-colors text-sm">
                   Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/partners" className="text-sidebar-foreground/70 hover:text-sidebar-foreground transition-colors text-sm">
-                  Partners
                 </Link>
               </li>
             </ul>
@@ -89,34 +76,24 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-sidebar-foreground mb-4">Contact Us</h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-3 text-sidebar-foreground/70 text-sm">
-                <MapPin className="w-4 h-4 shrink-0" />
-                <span>123 Tech Street, Jakarta, Indonesia</span>
-              </li>
-              <li className="flex items-center gap-3 text-sidebar-foreground/70 text-sm">
-                <Mail className="w-4 h-4 shrink-0" />
-                <span>hello@edufree.com</span>
-              </li>
-              <li className="flex items-center gap-3 text-sidebar-foreground/70 text-sm">
-                <Phone className="w-4 h-4 shrink-0" />
-                <span>+62 21 1234 5678</span>
-              </li>
-            </ul>
+            <h4 className="font-semibold mb-4 text-sm">Contact</h4>
+            <div className="flex items-center gap-2 text-background/60 text-sm">
+              <Mail className="w-4 h-4" />
+              <span>hello@skillpath.com</span>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-sidebar-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sidebar-foreground/50 text-sm">
-            © 2024 EduFree. All rights reserved.
+        <div className="mt-10 pt-6 border-t border-background/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-background/40 text-xs">
+            © 2024 SkillPath. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <Link to="/privacy" className="text-sidebar-foreground/50 hover:text-sidebar-foreground transition-colors text-sm">
-              Privacy Policy
+            <Link to="/privacy" className="text-background/40 hover:text-background transition-colors text-xs">
+              Privacy
             </Link>
-            <Link to="/terms" className="text-sidebar-foreground/50 hover:text-sidebar-foreground transition-colors text-sm">
-              Terms of Service
+            <Link to="/terms" className="text-background/40 hover:text-background transition-colors text-xs">
+              Terms
             </Link>
           </div>
         </div>
