@@ -30,7 +30,7 @@ export function GroupLabCard({
   enrolledCount,
 }: GroupLabCardProps) {
   return (
-    <Card variant="elevated" className="overflow-hidden group border-2 border-primary/10">
+    <Card variant="elevated" className="overflow-hidden group">
       {/* Thumbnail */}
       <div className="relative aspect-video overflow-hidden">
         <img
@@ -38,37 +38,37 @@ export function GroupLabCard({
           alt={title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
         <div className="absolute top-3 left-3 flex gap-2">
           <Badge variant={isFree ? "free" : "paid"}>
             {isFree ? "FREE" : `$${price}`}
           </Badge>
-          <Badge variant="secondary" className="bg-primary text-primary-foreground">
-            <Layers className="w-3 h-3 mr-1" />
-            {labsCount} Labs Bundle
-          </Badge>
         </div>
         {!isFree && (
           <div className="absolute top-3 right-3">
-            <div className="w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center">
-              <Lock className="w-4 h-4 text-premium" />
+            <div className="w-8 h-8 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center shadow-md">
+              <Lock className="w-4 h-4 text-secondary" />
             </div>
           </div>
         )}
+        <div className="absolute bottom-3 right-3">
+          <div className="flex items-center gap-1.5 bg-primary text-primary-foreground rounded-full px-3 py-1.5 shadow-md">
+            <Layers className="w-4 h-4" />
+            <span className="text-sm font-semibold">{labsCount} Labs</span>
+          </div>
+        </div>
       </div>
 
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <Star className="w-4 h-4 fill-premium text-premium" />
-            <span className="font-medium">{rating.toFixed(1)}</span>
-          </div>
-          <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Clock className="w-3.5 h-3.5" />
-            <span>{duration}</span>
+          <Badge variant="level" className="text-xs">
+            Bundle
+          </Badge>
+          <div className="flex items-center gap-1 text-sm">
+            <Star className="w-4 h-4 fill-secondary text-secondary" />
+            <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
           </div>
         </div>
-        <h3 className="text-lg font-bold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="text-lg font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
           {title}
         </h3>
       </CardHeader>
@@ -78,12 +78,12 @@ export function GroupLabCard({
         
         <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
-            <Layers className="w-3.5 h-3.5" />
-            <span>{labsCount} labs included</span>
+            <Clock className="w-3.5 h-3.5" />
+            <span>{duration}</span>
           </div>
           <div className="flex items-center gap-1">
             <Users className="w-3.5 h-3.5" />
-            <span>{enrolledCount.toLocaleString()} enrolled</span>
+            <span>{enrolledCount.toLocaleString()}</span>
           </div>
         </div>
       </CardContent>
@@ -91,10 +91,10 @@ export function GroupLabCard({
       <CardFooter>
         <Link to={`/group-labs/${id}`} className="w-full">
           <Button 
-            variant={isFree ? "success" : "premium"} 
+            variant={isFree ? "success" : "secondary"} 
             className="w-full"
           >
-            {isFree ? "Start Bundle" : "View Bundle"}
+            {isFree ? "Start Now" : "View Details"}
           </Button>
         </Link>
       </CardFooter>
