@@ -17,6 +17,15 @@ import CloudServices from "./pages/CloudServices";
 import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 
+// Admin Pages
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminCourseCreate from "./pages/admin/AdminCourseCreate";
+import AdminLabCreate from "./pages/admin/AdminLabCreate";
+import AdminWebinarCreate from "./pages/admin/AdminWebinarCreate";
+import AdminSettings from "./pages/admin/AdminSettings";
+import AdminSupport from "./pages/admin/AdminSupport";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -38,6 +47,16 @@ const App = () => (
           <Route path="/vouchers" element={<Vouchers />} />
           <Route path="/cloud-services" element={<CloudServices />} />
           <Route path="/careers" element={<Careers />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/courses/new" element={<AdminCourseCreate />} />
+          <Route path="/admin/labs/new" element={<AdminLabCreate />} />
+          <Route path="/admin/webinars/new" element={<AdminWebinarCreate />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
+          <Route path="/admin/support" element={<AdminSupport />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
