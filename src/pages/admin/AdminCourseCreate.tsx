@@ -15,6 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ContentBuilder, { createBlock } from "@/components/admin/content-builder/ContentBuilder";
+import type { ContentBlock } from "@/components/admin/content-builder/types";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -111,6 +113,13 @@ const AdminCourseCreate = () => {
       lessons: [],
       isExpanded: false,
     },
+  ]);
+
+  // Step 3 - Content Builder blocks (drag & drop)
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([
+    createBlock("text"),
+    createBlock("video"),
+    createBlock("code"),
   ]);
   
   // Step 4 - Settings
@@ -570,215 +579,11 @@ const AdminCourseCreate = () => {
         
       case 3:
         return (
-          <div className="grid grid-cols-3 gap-6">
-            <div className="col-span-2 space-y-4">
-              {/* Text Module */}
-              <Card className="border shadow-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
-                      <FileText className="w-4 h-4 text-primary" />
-                      <span className="font-medium text-sm">Text Module</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <Settings className="w-4 h-4" />
-                      </Button>
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                      <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  </div>
-                  
-                  <h4 className="font-semibold mb-3">Introduction to Python Variables</h4>
-                  
-                  <div className="flex items-center gap-1 mb-2">
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0 font-bold">B</Button>
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0 italic">I</Button>
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0"><LinkIcon className="w-4 h-4" /></Button>
-                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">•</Button>
-                  </div>
-                  
-                  <div className="p-3 bg-muted/30 rounded-lg text-sm">
-                    In Python, variables are created when you assign a value to it. Unlike other programming languages, Python has no command for declaring a variable.
-                  </div>
-                </CardContent>
-              </Card>
-              
-              {/* Video Module */}
-              <Card className="border shadow-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
-                      <Video className="w-4 h-4 text-red-500" />
-                      <span className="font-medium text-sm">Video Lesson</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge className="bg-accent/10 text-accent border-accent/20">
-                        <Lock className="w-3 h-3 mr-1" />
-                        PREMIUM
-                      </Badge>
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                      <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  </div>
-                  
-                  <h4 className="font-semibold mb-3">Variables Explained</h4>
-                  
-                  <div className="flex border-b mb-4">
-                    <button className="px-4 py-2 text-sm font-medium border-b-2 border-primary text-primary -mb-px">
-                      URL Embed
-                    </button>
-                    <button className="px-4 py-2 text-sm font-medium border-b-2 border-transparent text-muted-foreground -mb-px">
-                      Upload File
-                    </button>
-                  </div>
-                  
-                  <div className="flex gap-2 mb-4">
-                    <div className="flex items-center gap-2 flex-1 px-3 py-2 bg-muted/30 rounded-lg">
-                      <LinkIcon className="w-4 h-4 text-muted-foreground" />
-                      <input 
-                        type="text" 
-                        placeholder="https://www.youtube.com/watch?v=..." 
-                        className="bg-transparent border-0 outline-none text-sm flex-1"
-                        defaultValue="https://www.youtube.com/watch?v=kqtD5dpn9C8"
-                      />
-                    </div>
-                    <Button>Fetch</Button>
-                  </div>
-                  
-                  <div className="aspect-video bg-gray-900 rounded-lg flex items-center justify-center">
-                    <PlayCircle className="w-16 h-16 text-white/50" />
-                  </div>
-                </CardContent>
-              </Card>
-              
-              {/* Code Challenge */}
-              <Card className="border shadow-sm">
-                <CardContent className="p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <GripVertical className="w-4 h-4 text-muted-foreground cursor-grab" />
-                      <Code className="w-4 h-4 text-orange-500" />
-                      <span className="font-medium text-sm">Code Challenge</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                      <ChevronUp className="w-4 h-4 text-muted-foreground" />
-                    </div>
-                  </div>
-                  
-                  <h4 className="font-semibold mb-3">Hands-on: Declare a Variable</h4>
-                  
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <label className="text-xs font-medium uppercase text-muted-foreground">Language</label>
-                      <Select defaultValue="python">
-                        <SelectTrigger className="mt-1">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="python">Python 3.10</SelectItem>
-                          <SelectItem value="javascript">JavaScript</SelectItem>
-                          <SelectItem value="typescript">TypeScript</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <label className="text-xs font-medium uppercase text-muted-foreground">Points</label>
-                      <Input type="number" defaultValue="10" className="mt-1" />
-                    </div>
-                  </div>
-                  
-                  <div className="bg-gray-900 rounded-lg overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-2 bg-gray-800">
-                      <span className="text-xs text-gray-400">main.py</span>
-                      <Button variant="ghost" size="sm" className="text-primary text-xs h-7">
-                        Copy Code
-                      </Button>
-                    </div>
-                    <pre className="p-4 text-sm text-green-400 font-mono">
-                      <code>{`# Create a variable named 'x' and assign it value 5
-x = 5
-
-print(x)`}</code>
-                    </pre>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              {/* Drop zone */}
-              <div className="border-2 border-dashed rounded-lg p-8 text-center">
-                <Plus className="w-6 h-6 text-muted-foreground mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">Drag a module from the sidebar or click here to add</p>
-              </div>
-            </div>
-            
-            {/* Sidebar - Content Modules */}
-            <div>
-              <Card className="border shadow-sm sticky top-6">
-                <CardContent className="p-4">
-                  <h3 className="font-semibold text-sm uppercase tracking-wide text-primary mb-4">Content Modules</h3>
-                  
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-muted/30 cursor-pointer transition-colors">
-                      <FileText className="w-5 h-5 text-primary" />
-                      <div>
-                        <p className="font-medium text-sm">Text Block</p>
-                        <p className="text-xs text-muted-foreground">Rich text & images</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-muted/30 cursor-pointer transition-colors">
-                      <Video className="w-5 h-5 text-red-500" />
-                      <div>
-                        <p className="font-medium text-sm">Video Embed</p>
-                        <p className="text-xs text-muted-foreground">Youtube, Vimeo, Upload</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-muted/30 cursor-pointer transition-colors">
-                      <Code className="w-5 h-5 text-orange-500" />
-                      <div>
-                        <p className="font-medium text-sm">Code Challenge</p>
-                        <p className="text-xs text-muted-foreground">Monaco Editor / IDE</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-muted/30 cursor-pointer transition-colors">
-                      <HelpCircle className="w-5 h-5 text-purple-500" />
-                      <div>
-                        <p className="font-medium text-sm">Quiz / MCQ</p>
-                        <p className="text-xs text-muted-foreground">Single or multiple choice</p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-3 p-3 border rounded-lg hover:bg-muted/30 cursor-pointer transition-colors">
-                      <Puzzle className="w-5 h-5 text-accent" />
-                      <div>
-                        <p className="font-medium text-sm">Puzzle / Task</p>
-                        <p className="text-xs text-muted-foreground">Drag & drop sorting</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-6 p-3 bg-muted/30 rounded-lg">
-                    <h4 className="font-medium text-sm text-accent mb-1">Tips</h4>
-                    <p className="text-xs text-muted-foreground">
-                      You can drag items to reorder them. Use the "Lock" icon on blocks to make them accessible only to premium users.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+          <ContentBuilder
+            title="Course Content Modules"
+            value={contentBlocks}
+            onChange={setContentBlocks}
+          />
         );
         
       case 4:

@@ -17,14 +17,16 @@ import { cn } from '@/lib/utils';
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
   { icon: Users, label: 'Users', path: '/admin/users' },
-  { icon: BookOpen, label: 'Add Course', path: '/admin/courses/new' },
-  { icon: FlaskConical, label: 'Add Labs', path: '/admin/labs/new' },
-  { icon: Video, label: 'Add Webinar', path: '/admin/webinars/new' },
+  { icon: BookOpen, label: 'Courses', path: '/admin/courses' },
+  { icon: FlaskConical, label: 'Labs', path: '/admin/labs' },
+  { icon: Video, label: 'Webinars', path: '/admin/webinars/new' },
+  { icon: GraduationCap, label: 'Create Course', path: '/admin/courses/new' },
 ];
 
 const bottomItems = [
   { icon: Settings, label: 'Settings', path: '/admin/settings' },
   { icon: HelpCircle, label: 'Support', path: '/admin/support' },
+  { icon: Users, label: 'Access Control', path: '/admin/access-control' },
 ];
 
 export const AdminSidebar = () => {
