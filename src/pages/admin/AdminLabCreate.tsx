@@ -15,6 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import ContentBuilder, { createBlock } from "@/components/admin/content-builder/ContentBuilder";
+import type { ContentBlock } from "@/components/admin/content-builder/types";
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -82,7 +84,14 @@ const AdminLabCreate = () => {
     { id: '2', title: 'Kubernetes Pods & Services', duration: '60m', level: 'Intermediate', type: 'paid', icon: '☸️' },
     { id: '3', title: 'Advanced Networking with NGINX', duration: '90m', level: 'Advanced', type: 'paid', icon: '🌐' },
   ]);
-  
+
+  // Step 3 - Content Builder blocks (drag & drop)
+  const [contentBlocks, setContentBlocks] = useState<ContentBlock[]>([
+    createBlock("text"),
+    createBlock("video"),
+    createBlock("quiz"),
+  ]);
+
   const [availableLabs] = useState<AvailableLab[]>([
     { id: 'a1', name: 'AWS EC2 Basics', duration: '30 min', category: 'Cloud', type: 'free' },
     { id: 'a2', name: 'Python Data Science', duration: '120 min', category: 'Data', type: 'paid' },
@@ -440,18 +449,11 @@ const AdminLabCreate = () => {
         
       case 3:
         return (
-          <div className="text-center py-12">
-            <FlaskConical className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Lab Content Builder</h3>
-            <p className="text-muted-foreground mb-6">
-              This step uses the same content builder as courses.<br />
-              Add text blocks, videos, code challenges, and puzzles.
-            </p>
-            <Button onClick={() => setCurrentStep(4)}>
-              Skip to Review
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-          </div>
+          <ContentBuilder
+            title="Lab Content Modules"
+            value={contentBlocks}
+            onChange={setContentBlocks}
+          />
         );
         
       case 4:

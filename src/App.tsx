@@ -20,11 +20,14 @@ import NotFound from "./pages/NotFound";
 // Admin Pages
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
+import AdminCourses from "./pages/admin/AdminCourses";
+import AdminLabs from "./pages/admin/AdminLabs";
 import AdminCourseCreate from "./pages/admin/AdminCourseCreate";
 import AdminLabCreate from "./pages/admin/AdminLabCreate";
 import AdminWebinarCreate from "./pages/admin/AdminWebinarCreate";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminSupport from "./pages/admin/AdminSupport";
+import AdminAccessControl from "./pages/admin/AdminAccessControl";
 
 const queryClient = new QueryClient();
 
@@ -51,7 +54,10 @@ const App = () => (
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/access-control" element={<AdminAccessControl />} />
+          <Route path="/admin/courses" element={<AdminCourses />} />
           <Route path="/admin/courses/new" element={<AdminCourseCreate />} />
+          <Route path="/admin/labs" element={<AdminLabs />} />
           <Route path="/admin/labs/new" element={<AdminLabCreate />} />
           <Route path="/admin/webinars/new" element={<AdminWebinarCreate />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
