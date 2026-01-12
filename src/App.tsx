@@ -28,6 +28,9 @@ import AdminWebinarCreate from "./pages/admin/AdminWebinarCreate";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminSupport from "./pages/admin/AdminSupport";
 import AdminAccessControl from "./pages/admin/AdminAccessControl";
+import AdminCourseApproval from "./pages/admin/AdminCourseApproval";
+import AdminCategories from "./pages/admin/AdminCategories";
+import AdminBanners from "./pages/admin/AdminBanners";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +63,9 @@ const App = () => (
           <Route path="/admin/labs" element={<AdminLabs />} />
           <Route path="/admin/labs/new" element={<AdminLabCreate />} />
           <Route path="/admin/webinars/new" element={<AdminWebinarCreate />} />
+          <Route path="/admin/course-approval" element={<AdminCourseApproval />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
+          <Route path="/admin/banners" element={<AdminBanners />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="/admin/support" element={<AdminSupport />} />
           

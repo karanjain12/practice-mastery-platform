@@ -10,7 +10,10 @@ import {
   HelpCircle,
   ChevronLeft,
   ChevronRight,
-  GraduationCap
+  GraduationCap,
+  CheckSquare,
+  FolderOpen,
+  Image as ImageIcon
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,6 +22,9 @@ const menuItems = [
   { icon: Users, label: 'Users', path: '/admin/users' },
   { icon: BookOpen, label: 'Courses', path: '/admin/courses' },
   { icon: FlaskConical, label: 'Labs', path: '/admin/labs' },
+  { icon: CheckSquare, label: 'Course Approval', path: '/admin/course-approval' },
+  { icon: FolderOpen, label: 'Categories', path: '/admin/categories' },
+  { icon: ImageIcon, label: 'Banners', path: '/admin/banners' },
   { icon: Video, label: 'Webinars', path: '/admin/webinars/new' },
   { icon: GraduationCap, label: 'Create Course', path: '/admin/courses/new' },
 ];
