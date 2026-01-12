@@ -1,0 +1,242 @@
+import { useState } from "react";
+import AdminLayout from "@/components/admin/AdminLayout";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Plus, Search, Edit, Trash2, FolderOpen } from "lucide-react";
+
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+  courseCount: number;
+  labCount: number;
+  createdAt: string;
+}
+
+const seedCategories: Category[] = [
+  { id: "1", name: "Web Development", description: "Frontend and backend web technologies", courseCount: 12, labCount: 8, createdAt: "2025-06-01" },
+  { id: "2", name: "Cloud Computing", description: "AWS, Azure, GCP and cloud infrastructure", courseCount: 8, labCount: 15, createdAt: "2025-06-15" },
+  { id: "3", name: "Data Science", description: "Data analysis, ML, and AI fundamentals", courseCount: 6, labCount: 10, createdAt: "2025-07-01" },
+  { id: "4", name: "DevOps", description: "CI/CD, containers, and infrastructure automation", courseCount: 5, labCount: 12, createdAt: "2025-07-20" },
+  { id: "5", name: "Security", description: "Cybersecurity and secure development practices", courseCount: 4, labCount: 6, createdAt: "2025-08-10" },
+  { id: "6", name: "AI/ML", description: "Artificial intelligence and machine learning", courseCount: 7, labCount: 9, createdAt: "2025-09-01" },
+];
+
+export default function AdminCategories() {
+  const [categories, setCategories] = useState<Category[]>(seedCategories);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+  const [formData, setFormData] = useState({ name: "", description: "" });
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [categoryToDelete, setCategoryToDelete] = useState<Category | null>(null);
+
+  const filteredCategories = categories.filter(c =>
+    c.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleOpenDialog = (category?: Category) => {
+    if (category) {
+      setEditingCategory(category);
+      setFormData({ name: category.name, description: category.description });
+    } else {
+      setEditingCategory(null);
+      setFormData({ name: "", description: "" });
+    }
+    setDialogOpen(true);
+  };
+
+  const handleSave = () => {
+    if (!formData.name.trim()) return;
+
+    if (editingCategory) {
+      setCategories(categories.map(c =>
+        c.id === editingCategory.id
+          ? { ...c, name: formData.name, description: formData.description }
+          : c
+      ));
+    } else {
+      const newCategory: Category = {
+        id: Date.now().toString(),
+        name: formData.name,
+        description: formData.description,
+        courseCount: 0,
+        labCount: 0,
+        createdAt: new Date().toISOString().split('T')[0],
+      };
+      setCategories([...categories, newCategory]);
+    }
+
+    setDialogOpen(false);
+    setFormData({ name: "", description: "" });
+    setEditingCategory(null);
+  };
+
+  const handleDelete = () => {
+    if (categoryToDelete) {
+      setCategories(categories.filter(c => c.id !== categoryToDelete.id));
+      setDeleteDialogOpen(false);
+      setCategoryToDelete(null);
+    }
+  };
+
+  return (
+    <AdminLayout title="Categories">
+      <Card className="shadow-sm">
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between gap-4">
+            <CardTitle className="text-lg">Category Management</CardTitle>
+            <Button onClick={() => handleOpenDialog()}>
+              <Plus className="h-4 w-4 mr-2" /> Add Category
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              className="pl-9"
+              placeholder="Search categories..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+
+          <div className="rounded-lg border">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead>Category</TableHead>
+                  <TableHead>Description</TableHead>
+                  <TableHead>Courses</TableHead>
+                  <TableHead>Labs</TableHead>
+                  <TableHead>Created</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredCategories.map((category) => (
+                  <TableRow key={category.id}>
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        <FolderOpen className="w-4 h-4 text-primary" />
+                        <span className="font-medium">{category.name}</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="text-muted-foreground max-w-xs truncate">
+                      {category.description}
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">{category.courseCount}</Badge>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">{category.labCount}</Badge>
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">{category.createdAt}</TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex items-center justify-end gap-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8"
+                          onClick={() => handleOpenDialog(category)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-8 w-8 text-red-600 hover:text-red-700"
+                          onClick={() => {
+                            setCategoryToDelete(category);
+                            setDeleteDialogOpen(true);
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Add/Edit Category Dialog */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{editingCategory ? 'Edit Category' : 'Add Category'}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium mb-2">Category Name</label>
+              <Input
+                placeholder="e.g. Web Development"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2">Description</label>
+              <Textarea
+                placeholder="Brief description of this category..."
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+            <Button onClick={handleSave} disabled={!formData.name.trim()}>
+              {editingCategory ? 'Save Changes' : 'Add Category'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete Category</DialogTitle>
+          </DialogHeader>
+          <p className="text-muted-foreground">
+            Are you sure you want to delete "{categoryToDelete?.name}"? This action cannot be undone.
+          </p>
+          {categoryToDelete && (categoryToDelete.courseCount > 0 || categoryToDelete.labCount > 0) && (
+            <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <p className="text-sm text-amber-700">
+                This category has {categoryToDelete.courseCount} courses and {categoryToDelete.labCount} labs associated with it.
+              </p>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
+            <Button variant="destructive" onClick={handleDelete}>Delete</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </AdminLayout>
+  );
+}
